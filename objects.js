@@ -1,0 +1,1 @@
+//Objects and object functions freeze(), seal(), create()
