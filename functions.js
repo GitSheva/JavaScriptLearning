@@ -31,6 +31,8 @@ let sum = function(a, b) {
     return a + b;
 }
 
+console.dir(sum);
+
 //Arrow Function Expression
 console.log('Arrow Function Expression');
 
