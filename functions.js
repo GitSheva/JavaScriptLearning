@@ -1,1 +1,6 @@
 //Functions
+
+let f = function() {
+
+
+};
