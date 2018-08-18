@@ -23,3 +23,15 @@ console.log(f.apply(obj, arr));
 let bound = f.bind(obj);
 console.dir(bound);
 console.log(bound(1, 2, 3));
+
+
+//What is the difference between this? No difference
+console.log('Simple function example');
+let obj2 = { num: 2 };
+
+let f2 = function(objArg, a, b, c) {
+
+    return objArg.num + a + b + c;
+}
+
+console.log(f2(obj2, 1, 2, 3));
