@@ -1,6 +1,8 @@
 //Functions
+'use strict';
+
 let f = function() {
-    console.log('My functions file');
+    console.log(this);
 };
 
 f();
