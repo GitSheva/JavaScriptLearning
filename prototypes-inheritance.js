@@ -46,15 +46,21 @@ function Person(first, last, age, eye) {
     this.nationality = "English";
 }
 
-Person.prototype.sex = "M";
+function Man(sex) {
+    this.sex = "M";
+}
+
+Man.prototype = Person.prototype;
+
+//Person.prototype.sex = "M";
 
 
 //console.dir(Person);
 
 var myFather = new Person("John", "Doe", 50, "blue");
 //var myMother = new Person("Sally", "Rally", 48, "green");
-
-//console.dir(myFather);
+console.dir(Man);
+console.dir(myFather);
 
 /*
 In this example we have constructor function and we create two objects from this c.f.
@@ -130,8 +136,21 @@ class Rabbit extends Animal {
     }
 }
 
-let rab = new Rabbit("White Rabbit");
+class Rabbit2 {
+    newhide() {
+        alert(`${this.name} hides!`);
+    }
+}
 
-console.dir(Animal);
-console.dir(Rabbit);
-console.dir(rab);
+
+Rabbit2.__proto__ = Animal;
+
+
+//let rab = new Rabbit("White Rabbit");
+
+
+//console.dir(Animal);
+//console.dir(Animal);
+//console.dir(Rabbit);
+//console.dir(Rabbit2);
+//console.dir(rab);
