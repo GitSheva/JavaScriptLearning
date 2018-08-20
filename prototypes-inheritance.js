@@ -38,29 +38,43 @@ __proto__a reference works on every object to refer to its [[Prototype]]property
 prototype is an object automatically created as a special property of a function, which is used to store the properties (including methods) of a function object.
 */
 
-function Person(first, last, age, eye) {
-    this.firstName = first;
-    this.lastName = last;
+function Person(first, last, age, gender, interests) {
+    this.name = {
+        first,
+        last
+    };
     this.age = age;
-    this.eyeColor = eye;
-    this.nationality = "English";
+    this.gender = gender;
+    this.interests = interests;
 }
 
-function Man(sex) {
-    this.sex = "M";
+Person.prototype.fullName = function () {
+    return "test";
 }
 
-Man.prototype = Person.prototype;
+function Teacher(first, last, age, gender, interests, subject) {
+    Person.call(this, first, last, age, gender, interests);
 
-//Person.prototype.sex = "M";
+    this.subject = subject;
 
+    this.workingHours = function () {
+        return 8;
+    }
+}
 
-//console.dir(Person);
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
 
-var myFather = new Person("John", "Doe", 50, "blue");
+var teacher = new Teacher("John", "Doe", 50, "male", "golf", "test");
 //var myMother = new Person("Sally", "Rally", 48, "green");
-console.dir(Man);
-console.dir(myFather);
+
+console.log(teacher.fullName());
+console.log(teacher.workingHours());
+
+console.dir(Person);
+console.dir(Teacher);
+console.dir(teacher);
+
 
 /*
 In this example we have constructor function and we create two objects from this c.f.
