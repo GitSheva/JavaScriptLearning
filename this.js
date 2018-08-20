@@ -42,6 +42,10 @@ let cat = new Animal('Cat', 'Feline');
 cat.printName();
 cat.printType();
 
+let cat2 = Object.create(cat);
+console.dir(cat);
+console.dir(cat2);
+
 let lizard = new Animal('Varane', 'Reptiles');
 lizard.printName();
 lizard.printType();
