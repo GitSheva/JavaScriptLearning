@@ -36,6 +36,17 @@ What's the difference between __proto__ and prototype?
 __proto__a reference works on every object to refer to its [[Prototype]]property.
 
 prototype is an object automatically created as a special property of a function, which is used to store the properties (including methods) of a function object.
+
+In order to inherit one constructor function from another we need to do the following:
+
+1. Set ParentFunction.Call() in constructor of ChildFunction to setup parameters of parent constructor
+2. Override prototype property of child function with prototype of parent function through object create
+3. Change back prototype.constructor of child function to it's own constructor function
+
+See the example
+
+Please not that function methods inside of the functions like: Teacher this.workingHours will not be visible in prototypes when reviewing the function structure but will be available in inherited child objects.
+
 */
 
 function Person(first, last, age, gender, interests) {
