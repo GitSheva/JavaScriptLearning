@@ -3,7 +3,13 @@
 
 Prototypes and prototypical inheritance in objects
 
-In prototype in objects we have only _proto_ property which represents a prototype of the object
+In objects we have only _proto_ property which represents a prototype of the object
+
+So, regarding prototypes in javascript we will have the following related properties and methods:
+
+1. [[Prototype]] - hidden internal property which contains a prototype of the object
+2. __proto__ - getter/setter for [[Prototype]]
+3. prototype - property available only in constructor functions
 
 Object.create(proto[, descriptors]) – creates an empty object with given proto as [[Prototype]] (can be null) and optional property descriptors.
 
@@ -11,9 +17,7 @@ Object.getPrototypeOf(obj) – returns the [[Prototype]] of obj (same as __proto
 
 Object.setPrototypeOf(obj, proto) – sets the [[Prototype]] of obj to proto (same as __proto__ setter).
 
-__proto__ is a getter/setter for [[Prototype]]
-
-In the following example object rabbit inherits animal through proto setter and will not have prototype property at all
+In the following example object rabbit inherits animal through proto setter and will not have prototype (which is available in functions) property at all
 */
 
 let animal = {
@@ -56,14 +60,21 @@ rabbit2.getName = function () {
 }
 
 /*
+Best practices: It is better do not use _proto_ getter and setter for prototype setting or modifications
+*/
+
+/*
  ******************** END PROTOTYPES IN OBJECTS ******************************************
  */
 
 
-/*
-Prototypes in functions
 
-In functions we would have hidden property, _proto_ - getter and setter for [[Prototype]] and "prototype" property
+
+
+/*
+********************* PROTOTYPES IN FUNCTIONS ******************************************
+
+In functions we would have [[Prototype]] hidden property, _proto_ - getter and setter for [[Prototype]] and "prototype" property
 "prototype" property is different from any other mentioned properties and contains a "class definition" / pointer for any new created object through new from constructor function
 
 What's the difference between __proto__ and prototype?
@@ -71,6 +82,8 @@ __proto__ it is a getter and setter property for internal hidden [[Prototype]]pr
 We have this property in every object or function.
 
 prototype is an object automatically created as a special property of a function, which is used to store the properties (including methods) of a function object. So, when we define constructor function, javascript automatically create prototype property for every function which will contain a definition of his own constructor and any other property which is added through function.prototype
+
+Inheritance in constructor functions:
 
 In order to inherit one constructor function from another we need to do the following:
 
@@ -80,7 +93,7 @@ In order to inherit one constructor function from another we need to do the foll
 
 See the example
 
-Please not that function methods inside of the functions like: Teacher this.workingHours will not be visible in prototypes when reviewing the function structure but will be available in inherited child objects.
+Please note that function methods inside of the functions like: Teacher this.workingHours will not be visible in prototypes when reviewing the function structure but will be available in inherited child objects.
 
 */
 
@@ -99,6 +112,7 @@ Person.prototype.fullName = function () {
 }
 
 function Teacher(first, last, age, gender, interests, subject) {
+    // point 1
     Person.call(this, first, last, age, gender, interests);
 
     this.subject = subject;
@@ -109,8 +123,9 @@ function Teacher(first, last, age, gender, interests, subject) {
 }
 
 
-
+// point 2
 Teacher.prototype = Object.create(Person.prototype);
+// point 3
 Teacher.prototype.constructor = Teacher;
 
 Teacher.prototype.hair = function () {
@@ -118,7 +133,7 @@ Teacher.prototype.hair = function () {
 }
 
 var teacher = new Teacher("John", "Doe", 50, "male", "golf", "test");
-//var myMother = new Person("Sally", "Rally", 48, "green");
+
 /*
 console.log(teacher.fullName());
 console.log(teacher.workingHours());
@@ -165,7 +180,7 @@ let user = new User("John");
 CLASS INHERITANCE USING EXTENDS
 It works in the same way if we would use constructor functions and prototype inheritance.
 
-The extends keyword actually adds a [[Prototype]] reference from Rabbit.prototype to Animal.prototype, just as you expect it to be, and as we’ve seen before.
+The extends keyword actually adds a [[Prototype]] reference from Rabbit.prototype to Animal.prototype instance, just as you expect it to be, and as we’ve seen before.
 
 */
 
