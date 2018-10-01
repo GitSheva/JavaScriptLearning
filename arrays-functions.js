@@ -76,5 +76,15 @@ console.log(array1.reduce(reducer, 5)); //With initial value "5"
 
 /******************************************************************************************************************************************/
 
+/***********************************************************METHOD FILTER EXAMPLE 1********************************************************/
+//Filtering array for elements with lenght > 6
+var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+
+/******************************************************************************************************************************************/
 
 
