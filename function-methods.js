@@ -223,3 +223,5 @@ button.addEventListener('click', dog.talk.bind(dog)); // print woof
 
 // "this" inside of the talk function could be different depending on what context is calling it. 
 // When we want to replace this context we have to use bind() method and setup "this" that we need in this very moment.
+
+/*********************************************************************************************************************************************/
