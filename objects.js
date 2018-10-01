@@ -43,6 +43,7 @@ let user = {
 console.dir(user);
 
 //Using other object as prototype
+
 //Create constructor function 
 function Person(){
     this.name = "Vasiliy";
@@ -61,5 +62,70 @@ employee.title = "Manager";
 employee.salary = 120000;
 
 console.dir(employee);
+
+/******************************************************************************************************************************************/
+
+/***********************************************************MULTIWORD PROPERTIES AND DYNAMIC KEYS******************************************/
+
+// create object
+let user = {};
+
+// set
+user["likes birds"] = true;
+
+// get
+console.log(user["likes birds"]); // true
+
+// delete
+delete user["likes birds"];
+
+//create property with dynamic key
+const val = true;
+
+let key = val ? "value true" : "value false";
+
+user[key] = val;
+
+console.dir(user);
+
+/******************************************************************************************************************************************/
+
+/***********************************************************SHORTHAND PROPERTY VALUES*****************************************************/
+
+//create variables
+const name = "Vasiliy";
+const lastName = "Lomachenko";
+
+// create object, instead of name:name use just a variable
+let user = {
+    name,
+    lastName
+};
+
+console.dir(user);
+
+/******************************************************************************************************************************************/
+
+/***********************************************************VALIDATE IF PROPERTY EXISTS*****************************************************/
+
+//create variables
+const name = "Vasiliy";
+const lastName = "Lomachenko";
+
+// create object, instead of name:name use just a variable
+let user = {
+    name,
+    lastName
+};
+
+//list all properties of the object
+for(let key in user) {
+    // keys
+    console.log( key );  // name, age, isAdmin
+    // values for the keys
+    console.log( user[key] ); // John, 30, true
+}
+
+console.log("name" in user);
 
 /******************************************************************************************************************************************/
