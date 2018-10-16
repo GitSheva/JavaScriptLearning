@@ -5,10 +5,7 @@
  * 2. Validate recipient
  * 3. Make transfer
  */
-
-/********************************************************
- * SIMPLE EXAMPLE
- * 
+/*
 function validateSender() {
     setTimeout(function() {
         console.log("Validating sender...");
@@ -29,17 +26,28 @@ function makeTransfer(amount) {
 
 validateSender();
 validateRecipient();
-makeTransfer(100);
+makeTransfer(100);*/
 
-*/
 
-function validateSender() {
+
+let sender = {
+    name:"Vasya",
+    balance:5000
+};
+
+let recipient = {
+    name:"Petya",
+    balance:2000
+};
+
+
+function validateSender(sender) {
     return new Promise(function(resolve, reject) {
         setTimeout(function() {
-            let valid = false;
+            let valid = true;
             console.log("Validating sender...");
             if (valid) {
-                resolve("Sender is Valid");
+                resolve(sender);
             } else {
                 reject("Sender validation failed");
             }
@@ -47,50 +55,53 @@ function validateSender() {
     });
 }
 
-function validateRecipient() {
+function validateRecipient(recipient) {
     return new Promise(function(resolve, reject) {
         setTimeout(function() {
+            let valid = true;
             console.log("Validating recipient...");
-            resolve("Recipient is Valid");
+            if (valid) {
+                resolve(recipient);
+            } else {
+                reject("Recipient validation failed");
+            }
+
         }, 3000);
     });
 }
 
-function makeTransfer(amount) {
-    setTimeout(function() {
-        console.log(`Sending money...${amount}$`);
-    }, 1000);
+function makeTransfer(amount, sender, recipient) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+                let valid = true;
+                sender.balance -= amount;
+                recipient.balance += amount;
+                console.log(`Sending money... ${amount}$ from ${sender.name} to ${recipient.name}`);
+
+                if(valid){
+                    resolve("Operation completed.");
+                } else {
+                    reject("Error sending money.");
+                }
+            }, 1000);
+    });
 }
 
-validateSender().then((result) => {
-    console.log(result);
-    return validateRecipient();
-}).catch((err) => {
-    console.log(err);
-}).then((result) => {
-    console.log(result);
-    return makeTransfer(100);
-});
+console.log(`Sender balance ${sender.balance}.`);
+console.log(`Recipient balance ${recipient.balance}.`);
 
-/*
-validateSender().then((result => {
-            console.log(result);
-            return validateRecipient();
-        }).then((result) => {
-            console.log(result);
-            return makeTransfer();
-        })
-*/
-/*
-validateSender().then((result) => {
-    console.log(result);
-    return validateRecipient();
-}).catch((err) => {
-    console.log(err);
+validateSender(sender).then((validatedSender) => {
+    console.log(`Sender ${validatedSender.name} has been validated.`);
+    return validateRecipient(recipient);
+}).then((validatedRecipient) => {
+    console.log(`Recipient ${validatedRecipient.name} has been validated.`);
+    return makeTransfer(100, sender, recipient);
 }).then((result) => {
     console.log(result);
-    return makeTransfer(100);
+    console.log(`Sender new balance ${sender.balance}.`);
+    console.log(`Recipient new balance ${recipient.balance}.`);
 }).catch((err) => {
     console.log(err);
-});
-*/
+});;
+
+console.log("Execution continue...");
