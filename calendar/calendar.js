@@ -1,4 +1,36 @@
 
+function init(){
+    drawCalendar(2018, 10);
+}
+
+function drawCalendar(year, month){
+
+    let dayOfTheWeeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let theader = "<table id='calendarTable' border='1'>"
+
+    dayOfTheWeeks.forEach(d => {
+        theader += "<th>" + d + "</th>";
+    })
+
+    let matrix = getMatrix(year, month);
+
+    let tbody = "";
+
+    matrix.forEach(function (row) {
+        tbody += "<tr>";
+        
+        row.forEach(function(element){
+            tbody += "<td>" + element + "</td>";
+        });
+        
+        tbody += "</tr>"
+    });
+
+    let tfooter = "</table>";
+    
+    document.getElementById("calendar").innerHTML = theader + tbody + tfooter;
+}
 
 function getMatrix(y, m)
 {
