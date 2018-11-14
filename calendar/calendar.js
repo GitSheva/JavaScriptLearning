@@ -21,7 +21,7 @@ function drawCalendar(year, month){
         tbody += "<tr>";
         
         row.forEach(function(element){
-            tbody += "<td>" + element + "</td>";
+            tbody += "<td align='center'><a href=# onclick='return showDate(this.innerText);'>" + element + "</a></td>";
         });
         
         tbody += "</tr>"
@@ -31,6 +31,18 @@ function drawCalendar(year, month){
     
     document.getElementById("calendar").innerHTML = theader + tbody + tfooter;
 }
+
+function showDate(day){
+    let date = document.getElementById("datePlaceholder");
+
+    let month = document.getElementById("month");
+    let year = document.getElementById("year");
+
+    let today = new Date(year.value, month.value - 1, day);
+
+    date.innerHTML = "<h3>" + "Today is: " + today.toDateString() + "</h3>";
+}
+
 
 function getMatrix(y, m)
 {
@@ -59,3 +71,4 @@ function getMatrix(y, m)
 
     return matrix;
 }
+
