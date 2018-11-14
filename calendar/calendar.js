@@ -1,6 +1,13 @@
 
 function init(){
-    drawCalendar(2018, 10);
+    let today = new Date();
+    let month = document.getElementById("month");
+    let year = document.getElementById("year");
+
+    month.value = today.getMonth() + 1;
+    year.value = today.getFullYear();
+    
+    drawCalendar(today.getFullYear(), today.getMonth());
 }
 
 function drawCalendar(year, month){
@@ -32,18 +39,6 @@ function drawCalendar(year, month){
     document.getElementById("calendar").innerHTML = theader + tbody + tfooter;
 }
 
-function showDate(day){
-    let date = document.getElementById("datePlaceholder");
-
-    let month = document.getElementById("month");
-    let year = document.getElementById("year");
-
-    let today = new Date(year.value, month.value - 1, day);
-
-    date.innerHTML = "<h3>" + "Today is: " + today.toDateString() + "</h3>";
-}
-
-
 function getMatrix(y, m)
 {
     let rows = [...Array(6).keys()];
@@ -71,4 +66,30 @@ function getMatrix(y, m)
 
     return matrix;
 }
+
+function showDate(day){
+    let date = document.getElementById("datePlaceholder");
+
+    let month = document.getElementById("month");
+    let year = document.getElementById("year");
+
+    let today = new Date(year.value, month.value - 1, day);
+
+    date.innerHTML = "<h3>" + "Today is: " + today.toDateString() + "</h3>";
+}
+
+function changeDate(){
+    let month = document.getElementById("month");
+    let year = document.getElementById("year");
+
+    drawCalendar(year.value, month.value - 1);
+
+    clearDate();
+}
+
+function clearDate(){
+    let date = document.getElementById("datePlaceholder");
+    date.innerText = "";
+}
+
 
