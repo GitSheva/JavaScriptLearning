@@ -3,15 +3,41 @@ let myTodo = [];
 
 function addList() {
     
-    //console.log(document.getElementById("myInput").value);
-    //document.getElementById("Result").innerHTML = document.getElementById("myInput").value;
-
     if(document.getElementById("myInput").value != ""){
         
         myTodo.push(document.getElementById("myInput").value);
 
     }
     
-    console.log(myTodo);
+    showList();
+
+    document.getElementById("myInput").value = "";
+}
+
+function showList(){
+    
+    let list = "";
+    
+    list = "<ul>";
+
+    for (let i = 0; i < myTodo.length; i++) {
+        
+        list += "<li>" + myTodo[i] + "     <a href='#' onclick='return deleteItem(" + i + ");'>x</a></li>";
+    
+    }
+    
+    list += "</ul>";
+    
+    document.getElementById("Result").innerHTML = list;
+
+}
+
+function deleteItem(item){
+
+    let itemtodelete = item;
+    
+    myTodo.splice(itemtodelete, 1 );
+    
+    showList();
 }
 
